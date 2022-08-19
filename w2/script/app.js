@@ -68,7 +68,7 @@ const main = function (daysSinceRestock) {
   let someBeefOptions = 'You have the ingredients to make spagetthi.';
   let allPorkOptions = 'You have the ingredients to make pork chops.';
   let noMainDishes =
-    "You don't have the ingredients to make any main dishes! Eat out or go to the grocery store!";
+    "You don't have the ingredients to make any main dishes! Time for left overs, to eat out, or to go to the grocery store!";
   if (isFridgeEmpty) {
     showOnPage(noMainDishes);
   } else {
