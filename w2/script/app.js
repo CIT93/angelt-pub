@@ -60,6 +60,7 @@ const main = function (daysSinceRestock) {
         fullyStocked means that I have all the ingredients I need
         partiallyStocked means that I have some ingredients, enough to do a simpler main dish
   */
+  // options text
   let allChickenOptions =
     'You have the ingredients to make enchiladas or baked chicken.';
   let someChickenOptions = 'You have the ingredients to make baked chicken.';
@@ -69,6 +70,8 @@ const main = function (daysSinceRestock) {
   let allPorkOptions = 'You have the ingredients to make pork chops.';
   let noMainDishes =
     "You don't have the ingredients to make any main dishes! Time for left overs, to eat out, or to go to the grocery store!";
+
+  // actually deciding it
   if (isFridgeEmpty) {
     showOnPage(noMainDishes);
   } else {
