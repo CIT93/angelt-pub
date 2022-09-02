@@ -19,7 +19,7 @@ const showOnPage = function (text) {
   methods     // detFridgeStatus(), detFridgeEmpty(), resultOutput()
 
 */
-let fridge = {
+const fridge = {
   /* default values
 
   */
