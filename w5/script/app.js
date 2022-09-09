@@ -20,22 +20,22 @@ const showOnPage = function (text) {
 const fridge = {
   daysSinceRestock: 0,
   fridgeStatus: 'fullyStocked',
-  isFridgeEmpty: false,  
+  isFridgeEmpty: false,
 };
 
- /* |  function detFridgeStatus() - returns a value to be assigned to fridgeStatus based 
+/* |  function detFridgeStatus() - returns a value to be assigned to fridgeStatus based 
         on the value of daysSinceRestock
 
   */
 const detFridgeStatus = function () {
-    if (fridge.daysSinceRestock < 3) {
-      return 'fullyStocked';
-    } else if (fridge.daysSinceRestock >= 3 && fridge.daysSinceRestock <= 5) {
-      return 'partiallyStocked';
-    } else {
-      return 'empty';
-    }
+  if (fridge.daysSinceRestock < 3) {
+    return 'fullyStocked';
+  } else if (fridge.daysSinceRestock >= 3 && fridge.daysSinceRestock <= 5) {
+    return 'partiallyStocked';
+  } else {
+    return 'empty';
   }
+};
 
 /* |  function detFridgeEmpty() - returns a value to be assigned to isFridgeEmpty based 
         on the value of fridgeStatus
@@ -59,19 +59,31 @@ const resultOutput = function () {
   /*  results array
       index - corresponding fridgeStatus ::: 0 - fullyStocked, 1 - partiallyStocked, 2 - empty
   */
-  let results = ['You have the ingredients to make enchiladas, baked chicken, beef tacos, spaghetti, or pork chops.',
-    'You have the ingredients to make baked chicken or spagetthi.',
-    "You don't have the ingredients to make any main dishes! Time for left overs, to eat out, or to go to the grocery store!"
+  const results = [
+    {
+      rStat: 'fullyStocked',
+      rText:
+        'You have the ingredients to make enchiladas, baked chicken, beef tacos, spaghetti, or pork chops.',
+    },
+    {
+      rStat: 'partiallyStocked',
+      rText: 'You have the ingredients to make baked chicken or spagetthi.',
+    },
+    {
+      rStat: 'empty',
+      rText:
+        "You don't have the ingredients to make any main dishes! Time for left overs, to eat out, or to go to the grocery store!",
+    },
   ];
 
   // deciding which output to print
   if (fridge.isFridgeEmpty) {
-    showOnPage(results[2]);
+    showOnPage(results[2].rText);
   } else {
-    if (fridge.fridgeStatus === 'fullyStocked') {
-      showOnPage(results[0]);
-    } else if (fridge.fridgeStatus === 'partiallyStocked') {
-      showOnPage(results[1]);
+    if (fridge.fridgeStatus === results[0].rStat) {
+      showOnPage(results[0].rText);
+    } else if (fridge.fridgeStatus === results[1].rStat) {
+      showOnPage(results[1].rText);
     }
   }
 
