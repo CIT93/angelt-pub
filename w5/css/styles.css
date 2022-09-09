@@ -1,0 +1,12 @@
+
+/* 
+    > is the child selector and * is the universal selector.
+    selects every child in the div
+    when a new line is added to the div, it's a new p element.
+    could also just do div > p
+    */
+div > * {
+    width: fit-content;
+    margin: auto;
+    text-align: center;
+}
