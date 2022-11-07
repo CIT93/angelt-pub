@@ -1,52 +1,34 @@
-const fridge = {
-  daysSinceRestock: 0,
-  fridgeStatus: 'fullyStocked',
-  isFridgeEmpty: false,
-};
+'use strict';
 
-const outputTop = document.querySelector('#top-output');
-const outputBottom = document.querySelector('#bottom-output');
+const days = [];
 
-const button = document
-  .querySelector('#new-day')
-  .addEventListener('click', function (e) {
-    fridge.daysSinceRestock = Math.floor(Math.random() * 8);
-    generateDOM(fridge);
-  });
+/*
+  assigning text values 
+*/
 
-/* |  function detFridgeStatus() - returns a value to be assigned to fridgeStatus based 
-        on the value of daysSinceRestock
+/*
+  get fridge status using daysSinceRestock and ateOut
+  dsr = daysSinceRestock
+  ao = ateOut
+*/
+const detFridgeStatus = function (dsr, ao) {
+  if (ao) {
+    dsr--;
+  }
 
-  */
-const detFridgeStatus = function () {
-  if (fridge.daysSinceRestock < 3) {
+  if (dsr < 3) {
     return 'fullyStocked';
-  } else if (fridge.daysSinceRestock >= 3 && fridge.daysSinceRestock <= 5) {
+  } else if (dsr >= 3 && dsr <= 5) {
     return 'partiallyStocked';
   } else {
     return 'empty';
   }
 };
 
-/* |  function detFridgeEmpty() - returns a value to be assigned to isFridgeEmpty based 
-        on the value of fridgeStatus
-
-    */
-const detFridgeEmpty = function () {
-  if (
-    fridge.fridgeStatus === 'fullyStocked' ||
-    fridge.fridgeStatus === 'partiallyStocked'
-  ) {
-    return false;
-  } else {
-    return true;
-  }
-};
-
 /* |  function resultOutput() - Printing output based off of fridgeStatus/isFridgeEmpty
 
   */
-const resultOutput = function () {
+const resultOutput = function (fridgeStatus) {
   /*  results array
       index - corresponding fridgeStatus ::: 0 - fullyStocked, 1 - partiallyStocked, 2 - empty
   */
@@ -58,7 +40,7 @@ const resultOutput = function () {
     },
     {
       rStat: 'partiallyStocked',
-      rText: 'You have the ingredients to make baked chicken or spagetthi.',
+      rText: 'You have the ingredients to make baked chicken or spaghetti.',
     },
     {
       rStat: 'empty',
@@ -67,69 +49,121 @@ const resultOutput = function () {
     },
   ];
 
-  // deciding which output to print
-  if (fridge.isFridgeEmpty) {
-    generateP(results[2].rText);
+  // deciding which output to return
+  if (fridgeStatus === results[2].rStat) {
+    return results[2].rText;
   } else {
-    if (fridge.fridgeStatus === results[0].rStat) {
-      generateP(results[0].rText);
-    } else if (fridge.fridgeStatus === results[1].rStat) {
-      generateP(results[1].rText);
+    if (fridgeStatus === results[0].rStat) {
+      return results[0].rText;
+    } else if (fridgeStatus === results[1].rStat) {
+      return results[1].rText;
     }
   }
 };
 
-/* |    MAIN FUNCTION
-        first determines fridgeStatus and isFridgeEmpty using the daysSinceRestock variable
-        fridgeStatus = fullyStocked || partiallyStocked || null
-        isFridgeEmpty = true || false
+/*
+  building dom
 */
-const main = function (obj) {
-  generateDaysSinceRestock(obj.daysSinceRestock);
-  generateH3('Variables:');
 
-  obj.fridgeStatus = detFridgeStatus();
-  obj.isFridgeEmpty = detFridgeEmpty();
-
-  generateP(`(local) fridgeStatus = ${obj.fridgeStatus}`);
-  generateP(`(local) isFridgeEmpty = ${obj.isFridgeEmpty}`);
-  generateH3('Output:');
-
-  resultOutput();
-};
-
-/** generating DOM */
-// create H1
-const generateH1 = function (text) {
-  const title = document.createElement('h1');
-  title.textContent = text;
-  outputTop.appendChild(title);
-};
-// create H2
-const generateDaysSinceRestock = function (days) {
+/*
+  creates day header
+  dWeek = dayOfWeek
+  dNum = dayNumber
+*/
+const generateDayHeader = function (dWeek, dNum) {
   const h2 = document.createElement('h2');
-  h2.textContent = `Days since fridge has been restocked: ${days}`;
+  h2.textContent = `${dWeek}, Recorded Day # ${dNum}`;
   outputBottom.appendChild(h2);
 };
-// create H3
-const generateH3 = function (text) {
-  const h3 = document.createElement('h3');
-  h3.textContent = text;
-  outputBottom.appendChild(h3);
+
+// creates dsr message
+const generateDaysSinceRestock = function (days) {
+  const p = document.createElement('p');
+  p.textContent = `Days since fridge has been restocked: ${days}`;
+  outputBottom.appendChild(p);
 };
-// create p
-const generateP = function (text) {
+
+// creates message listing what we have to make
+const generateFridgeContentsMssg = function (fs) {
+  const text = resultOutput(fs);
   const p = document.createElement('p');
   p.textContent = text;
   outputBottom.appendChild(p);
 };
-// create hr
-const generateHR = function () {};
 
-const generateDOM = function (fridge) {
-  main(fridge);
-  const hr = document.createElement('hr');
-  outputBottom.appendChild(hr);
+const generateAteOutMssg = function (ao, dsr) {
+  if (!ao) {
+    return;
+  } else {
+    const p = document.createElement('p');
+    p.textContent = `Since you ate out this week, you have one meals worth of ingredients more than you usually would ${dsr} days after a restock!`;
+    outputBottom.appendChild(p);
+  }
 };
 
-generateH1("What's in your fridge today?");
+const generateDOM = function (day) {
+  generateDayHeader(day.dayOfWeek, day.dayNumber);
+  generateDaysSinceRestock(day.daysSinceRestock);
+  if (day.ateOut) {
+    generateAteOutMssg(day.ateOut, day.daysSinceRestock);
+  }
+  generateFridgeContentsMssg(day.fridgeStatus);
+};
+
+/*
+  responding to interaction with DOM
+*/
+
+const outputBottom = document.querySelector('#bottom-output');
+
+// takes values from form when bttn is clicked
+document.querySelector('#new-day').addEventListener('click', function (e) {
+  // clears the output div
+  outputBottom.textContent = '';
+
+  // grabs from user input
+  const daysInput = document.querySelector('#lastRestock');
+  const daysSinceRestock = daysInput.value;
+  if (daysSinceRestock === '') {
+    return;
+  }
+
+  const dayTitle = document.querySelector('#day-of-week');
+  const dayOfWeek = dayTitle.value;
+
+  const ateOutCB = document.querySelector('#ate-out');
+  const ateOut = ateOutCB.checked;
+
+  const fridgeStat = detFridgeStatus(daysSinceRestock, ateOut);
+
+  days.push({
+    dayNumber: days.length + 1,
+    daysSinceRestock: daysSinceRestock,
+    dayOfWeek: dayOfWeek,
+    fridgeStatus: fridgeStat,
+    ateOut: ateOut,
+  });
+
+  daysInput.value = '';
+  dayTitle.value = 'Monday';
+  ateOutCB.checked = false;
+
+  generateDOM(days[days.length - 1]);
+
+  // prevents refresh
+  e.preventDefault();
+});
+
+// when clear bttn is pressed, gets rid of text in outputBottom
+document.querySelector('#clear').addEventListener('click', function (e) {
+  outputBottom.textContent = '';
+});
+
+// when show all bttn is pressed, gets rid of text in outputBottom
+document.querySelector('#showAll').addEventListener('click', function (e) {
+  outputBottom.textContent = '';
+
+  days.forEach(function (day) {
+    generateDOM(day);
+  });
+});
