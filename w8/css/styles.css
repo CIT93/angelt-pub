@@ -1,0 +1,31 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+#top-output, #bottom-container {
+    display: inline-block;
+    width: 49%;
+    min-width: 350px;
+    vertical-align: top;
+    padding: 1rem;
+    border: 2px solid black;
+    background-color: rgba(0, 0, 0, 0.048)
+}
+
+h2 {
+    color: rgba(0, 0, 0, 0.749)
+}
+
+button {
+    background-color: rgba(0, 0, 0, 0.749);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: .20rem .35rem;
+}
+
+#clear, #showAll {
+    float: right;
+    margin-left: .75rem;
+}
