@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>W10 learntogether</title>
+</head>
+
+<body>
+    <button class="deleteDay" style="display:none"></button>
+    <div id="top-output">
+        <form action="">
+            <h1>What's in the fridge?</h1>
+            <label>Days since last fridge restock: </label>
+            <input id="lastRestock" type="number" placeholder="0" required> <br>
+            <label>Current day of week: </label>
+            <select id="day-of-week">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select> <br>
+            <input id="ate-out" type="checkbox">Ate out this week</input><br>
+            <div class="error"></div>
+            <button type="submit" id="new-day">Generate New Day</button>
+        </form>
+    </div>
+    <div id="bottom-container">
+        <div id="bottom-output">
+            <p class="bottom-container-sorted">Sorted by last updated</p>
+        </div>
+        <button id="showAll">Show All Recorded Days</button>
+    </div>
+    <script src="./script/uuidv4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"
+        integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./script/functions.js"></script>
+    <script src="./script/app.js"></script>
+</body>
+<!-- dont use show on page, create functions that generate dom, button generates new output -->
+
+</html>
