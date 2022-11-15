@@ -45,9 +45,12 @@ const editDay = (id) => {
       errorMssg.textContent = `⚠ Error: Invalid number of days since restock`;
       outputBottom.appendChild(errorMssg);
     } else {
+      let day = days[index];
       const timestamp = moment().valueOf();
-      days[index].daysSinceRestock = dayInput.value;
-      days[index].updatedAt = timestamp;
+      day.daysSinceRestock = dayInput.value;
+      day.fridgeStatus = detFridgeStatus(day.daysSinceRestock, day.ateOut);
+
+      day.updatedAt = timestamp;
 
       saveDays(days);
       outputBottom.textContent = '';
