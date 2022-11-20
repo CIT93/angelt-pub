@@ -73,6 +73,7 @@ document.querySelector('.purchase').addEventListener('click', (e) => {
   purchases.validatePurchase();
   purchases.updatePurchaseTotal();
   updatePurchaseStatementContainer(purchases);
+  resetForm();
   renderOutput(purchases);
 });
 

@@ -1,3 +1,10 @@
+const resetForm = () => {
+  topsDropDown.value = 'default';
+  topsQtyInput.value = 0;
+  bottomsDropDown.value = 'default';
+  bottomsQtyInput.value = 0;
+};
+
 const updatePurchaseStatementContainer = (purchases) => {
   let pTotal = 0;
   purchases.purchaseItems.forEach((item) => {
