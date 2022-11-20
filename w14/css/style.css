@@ -1,0 +1,50 @@
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+html {
+    background-color: rgb(243, 243, 243);
+}
+
+h1 {
+    color: #5560F2;
+    margin-left: .25rem;
+}
+
+button {
+    margin: .5rem 1rem;
+    border: 1px solid gray;
+    background-color: #5560F2;
+    color: rgb(243, 243, 243);
+    border-radius: 5px;
+}
+
+.form-container {
+    display: inline-block;
+    width: 25%;
+    max-width: 280px;
+    padding: .5rem 1rem;
+}
+
+.form-container > select,
+.form-container > input {
+    float: right;
+}
+
+.purchase-statement-container {
+    font-weight: bold;
+}
+
+#tops-error,
+#bottoms-error {
+    display: none;
+    color: #5560F2;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.error-output, 
+.purchase-statement-container,
+.output {
+    padding: .75rem 3rem;
+}
