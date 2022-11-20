@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./app2.js" defer></script>
+    <title>w13 learntogether</title>
+</head>
+
+<body>
+    <form id="tops-form">
+        <select id="tops-drop-down">
+            <option value="default">-</option>
+            <option value="shirt">T-Shirt ($12.99)</option>
+            <option value="blouse">Blouse ($24.49)</option>
+            <option value="hoodie">Hoodie ($49.99)</option>
+            <option value="tank">Tank Top ($8.69)</option>
+        </select>
+        <input type="number" id="tops-quantity" placeholder="0">
+    </form>
+
+    <form id="bottoms-form">
+        <select id="bottoms-drop-down">
+            <option value="default">-</option>
+            <option value="leggings">Leggings ($9.99)</option>
+            <option value="skirt">Skirt ($14.29)</option>
+            <option value="jeans">Jeans ($29.95)</option>
+            <option value="shorts">Shorts ($19.99)</option>
+        </select>
+        <input type="number" id="bottoms-quantity" placeholder="0">
+
+    </form>
+
+    <div class="error-output">
+        <p id="tops-error">Please make sure you have selected a top and quantity.</p>
+        <p id="bottoms-error">Please make sure you have selected a bottom and quantity.</p>
+    </div>
+    <button class="purchase">New Purchase</button>
+    <div class="purchase-statement-container">You have purchases 0 item(s) for a total cost of $0.00</div>
+    <button id="view-purchase-history" class="view">Hide Purchase History</button>
+    <div class="output"></div>
+
+</body>
+
+</html>
